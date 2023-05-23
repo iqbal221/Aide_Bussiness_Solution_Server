@@ -1,9 +1,9 @@
 const UserController = require("../Controller/UserController");
 const ProductController = require("../Controller/ProductController");
-const UploadController = require("../Controller/UploadController");
+// const UploadController = require("../Controller/UploadController");
 const express = require('express');
 const { AuthVerifyToken } = require("../Middleware/AuthVerifyToken");
-const uploader = require("../Middleware/Uploader");
+// const uploader = require("../Middleware/Uploader");
 const router = express.Router();
 
 // signup and login
@@ -21,10 +21,10 @@ router.get('/GetProduct', ProductController.GetProduct);
 router.post('/AddCardProduct',AuthVerifyToken, ProductController.AddMyCardProduct);
 
 // image upload
-router.post('/upload_file',uploader.array("image"),UploadController.fileUpload)
+// router.post('/upload_file',uploader.array("image"),UploadController.fileUpload)
 
 // user Info
-router.get("/GetUserInfo", AuthVerifyToken,  UserController.GetUserInfo)
+// router.get("/GetUserInfo", AuthVerifyToken,  UserController.GetUserInfo)
 
 
 module.exports = router;
