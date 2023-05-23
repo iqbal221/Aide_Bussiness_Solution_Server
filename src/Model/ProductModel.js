@@ -10,10 +10,10 @@ const DataSchema = mongoose.Schema({
         type:String,
         required:true, 
     },
-    Image:{
-       type:String,
+    // Image:{
+    //    type:String,
      
-    },
+    // },
     CreateDate:{
         type:Date,
         default:Date.now()

@@ -13,9 +13,9 @@ exports.GetProductService = async() =>{
 }
 
 // add cart product
-exports.AddMyCardProductService = async(product) =>{
-    const query = ProductModel.findOne({_id:product._id}).toArray()
-    console.log(query)
-    const result = await ProductModel.create(query)
-    return result
-}
+// exports.AddMyCardProductService = async(product) =>{
+//     const query = ProductModel.findOne({_id:product._id}).toArray()
+//     console.log(query)
+//     const result = await ProductModel.create(query)
+//     return result
+// }

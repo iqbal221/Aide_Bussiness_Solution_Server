@@ -27,13 +27,13 @@ exports.GetProduct = async(req,res)=>{
   }
 
   // add my card product
-exports.AddMyCardProduct = async(req, res) => {
-    try {
-        const product = req.body;
-        const result = await ProductService.AddMyCardProductService(product)
-        console.log(result)
-        res.status(200).json({status:'success', data:result, message:"Product added successfully"})
-    } catch (error) {
-        res.status(400).json({status:'failed',message:"Do not added product"})
-    }
-  };
+// exports.AddMyCardProduct = async(req, res) => {
+//     try {
+//         const product = req.body;
+//         const result = await ProductService.AddMyCardProductService(product)
+//         console.log(result)
+//         res.status(200).json({status:'success', data:result, message:"Product added successfully"})
+//     } catch (error) {
+//         res.status(400).json({status:'failed',message:"Do not added product"})
+//     }
+//   };
