@@ -1,39 +1,30 @@
+const ProductService = require("../Services/ProductService");
 
-const ProductService = require("../Services/ProductService")
 
-
-// add product
-exports.AddProduct = async(req, res) => {
+// upload product
+exports.UploadProduct = async (req, res,next) => {
     try {
-        const userInfo = req.body;
-        // console.log(userInfo)
-        const result = await ProductService.AddProductService(userInfo)
-        // console.log(result)
-        res.status(200).json({status:'success', data:result, message:"Product added successfully"})
-    } catch (error) {
-        res.status(400).json({status:'failed',message:"Do not added product"})
-    }
-  };
-  
-// get product
-exports.GetProduct = async(req,res)=>{
-    try {
-        const result = await ProductService.GetProductService()
-        // console.log(result)
-        res.status(200).json({status:'success',data:result})
-    } catch (error) {
-        res.status(400).json({status:'failed',error:error.message})
-    }
+        let result = await ProductService.uploadProductService(req.body);
+        console.log(result)
+        res.status(200).send({
+            status: "success",
+            message:"Product added successfully"
+          });
+        } catch (error) {
+          next(error);
+        }
+};
+
+
+exports.GetUploadProduct = async (req, res, next) => {
+  try {
+    let result = await ProductService.getUploadProductService();
+    res.status(200).json({
+      status: "success",
+      message:"Product added successfully",
+      data:result
+    });
+  } catch (error) {
+    next(error);
   }
-
-  // add my card product
-// exports.AddMyCardProduct = async(req, res) => {
-//     try {
-//         const product = req.body;
-//         const result = await ProductService.AddMyCardProductService(product)
-//         console.log(result)
-//         res.status(200).json({status:'success', data:result, message:"Product added successfully"})
-//     } catch (error) {
-//         res.status(400).json({status:'failed',message:"Do not added product"})
-//     }
-//   };
+};

@@ -16,16 +16,6 @@ exports.CreateUser = async(req, res) => {
   }
 };
 
-exports.GetUserInfo = async(req, res) => {
-  try {
-      const user = await UserService.findUserByEmailService(req.user?.Email)
-      // console.log(result)
-      res.status(200).json({status:'success',data:user.Email})
-  } catch (err) {
-      res.status(400).json({status:'failed',error:err.message})
-  }
-};
-
 // ---------------------- handle Login ----------------------
 exports.LoginUser = async (req,res) => {
   const { Email, Password } = req.body;
@@ -59,7 +49,7 @@ exports.AddUser = async(req, res) => {
   }
 };
 
-// get user
+// get all user
 exports.GetUser = async(req,res)=>{
   try {
       const result = await UserService.GetUserService()
@@ -70,7 +60,19 @@ exports.GetUser = async(req,res)=>{
   }
 }
 
-// delete user
+// get user by id
+exports.GetUserById = async(req, res) => {
+  try {
+      const {id} = req.params;
+      const user = await UserService.GetUserByIdService(id)
+      // console.log(result)
+      res.status(200).json({status:'success',data:user})
+  } catch (err) {
+      res.status(400).json({status:'failed',error:err.message})
+  }
+};
+
+// delete add user
 exports.DeleteUser = async(req,res)=>{
   try {
       const {id} = req.params;
@@ -82,3 +84,14 @@ exports.DeleteUser = async(req,res)=>{
   }
 }
 
+// update add user
+exports.UpdateUser = async(req,res)=>{
+  try {
+      const {id} = req.params;
+      const result = await UserService.UpdateUserService(id,req.body)
+      console.log(result)
+      res.status(200).json({status:'success',data:result})
+  } catch (error) {
+      res.status(400).json({status:'failed',error:error.message})
+  }
+}

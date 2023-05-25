@@ -6,14 +6,14 @@ const DataSchema = mongoose.Schema({
         required:true,
     
     },
-    Price:{
+    Image:{
         type:String,
+        required:true,
+    },
+    Price:{
+        type:Number,
         required:true, 
     },
-    // Image:{
-    //    type:String,
-     
-    // },
     CreateDate:{
         type:Date,
         default:Date.now()

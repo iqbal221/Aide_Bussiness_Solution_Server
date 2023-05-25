@@ -1,21 +1,14 @@
-const ProductModel = require('../Model/ProductModel')
+const ProductModel = require("../Model/ProductModel");
 
-// add upload product
-exports.AddProductService = async(data) =>{
-    const result = await ProductModel.create(data)
+exports.uploadProductService = async (data) => {
+    console.log(data)
+    const {Name,Price,Image} = data
+    let result = await ProductModel.create({Name:Name,Price:Price,Image:Image});
     return result
 }
 
-// get upload product
-exports.GetProductService = async() =>{
-    const result = await ProductModel.find()
-    return result
-}
-
-// add cart product
-// exports.AddMyCardProductService = async(product) =>{
-//     const query = ProductModel.findOne({_id:product._id}).toArray()
-//     console.log(query)
-//     const result = await ProductModel.create(query)
-//     return result
-// }
+// Get all document
+exports.getUploadProductService = async () => {
+    let data = await ProductModel.find()
+    return data
+};

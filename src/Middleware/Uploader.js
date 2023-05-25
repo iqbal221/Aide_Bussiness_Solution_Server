@@ -1,28 +1,34 @@
-const multer = require("multer")
-const path = require("path")
+const multer = require('multer')
 
-const storage = multer.diskStorage({
-    destination: "images/",
-    filename: (req, file, cb)=> {
-      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
-      cb(null, uniqueSuffix + '-' + file.originalname)
-    }
-  })
-  
-const uploader = multer({
-    storage:storage,
-    fileFilter: (req,file,cb) =>{
-        const supportedImage = /png|jpg|jpeg/;
-        const extension = path.extname(file.originalname);
 
-        if(supportedImage.test(extension)){
-            cb(null, true)
-        }else{
-            cb(new Error("Must be png/jpg/jpeg image"))
-        }
+let storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+      cb(null,"./src/uploads/");
     },
-    limits:{
-        fileSize: 5000000
+    filename: (req, file, cb) => {
+      const fileName = Date.now() + "_" + file.originalname
+      file.originalname = fileName
+      cb(null, fileName);
+  
+    },
+  });
+  
+let uploader = multer({
+    storage: storage,
+    limits: {
+    fileSize:1024 * 1024 * 5 // 5 MB
+    },
+    fileFilter:(req,file,cb) =>{
+      
+        if(file.fieldname === "image"){
+            if(
+            file.mimetype === "image/jpg" || file.mimetype === "image/jpeg" || file.mimetype === "image/png" || file.mimetype === "application/pdf" || file.mimetype === "application/docx"
+           ){
+            cb(null, true)
+           } else {
+            cb(new Error("only .jpg .jpeg .png .pdf .docx are allowed"))
+           }
+        }
     }
 })
 

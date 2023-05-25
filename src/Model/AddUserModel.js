@@ -17,10 +17,14 @@ const DataSchema = mongoose.Schema({
     Plan:{
         type:String,
         required:true,
-      
      },
     Status:{
-
+        type:String,
+        required:true,
+    },
+    Image:{
+        type:String,
+        required:true,
     },
     CreateDate:{
         type:Date,
